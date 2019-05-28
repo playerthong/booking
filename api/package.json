@@ -1,0 +1,25 @@
+{
+  "name": "bookingapi",
+  "version": "1.0.0",
+  "description": "backend api",
+  "main": "src/index.js",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "microservice-kit": "^0.4.1",
+    "mongoose": "^5.5.11",
+    "nodemon": "^1.19.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4"
+  },
+  "scripts": {
+    "dbscript": "node src/database.js",
+    "start": "nodemon src/index.js",
+    "test": "mocha --timeout 20000 ",
+    "prettier": "./node_modules/prettier/bin-prettier.js '**/**.js' --write"
+  }
+}
