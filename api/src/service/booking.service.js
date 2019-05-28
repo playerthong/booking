@@ -117,7 +117,25 @@ async function listBookingByCustomer(ctx) {
 }
 
 
+async function listBooking(ctx) {
+    ctx.type='application/json';
+        let body=await new Promise((resolve, reject) => {
+            Booking.find()
+            .then(result => {
+                let data= {success: true, data: result, err: null, message: null}; 
+                let body=JSON.stringify(data);
+                resolve(body);
+            }).catch(err => {
+                console.log(err);
+                let data= {success: false, data: null, err: "BOOKING_CAN_NOT_FIND", message: err.toString()};
+                let body=JSON.stringify(data);
+                resolve(body);
+            });
+      });
+      ctx.body = body;
+}
+
 
 module.exports = {
-    saveBooking,deleteBooking,listBookingByCustomer
+    saveBooking,deleteBooking,listBookingByCustomer,listBooking
 }

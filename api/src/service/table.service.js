@@ -34,22 +34,36 @@ let {_pick} = require('../helper');
         entity.updateAt=new Date().getTime();
         entity.createAt=new Date().getTime();
         let body=await new Promise((resolve, reject) => {
-            Tables.create({
-                ...entity
-            }, function(err, result) {
-                if(err) {
-                    console.log(err);
-                    let data= {success: false, data: null, err: "TABLE_CAN_NOT_CREATE", message: err.toString()};
-                    let body=JSON.stringify(data);
-                    resolve(body);
+            Tables.find({"code":entity.code}, function (err, data) {
+                if (err) {
+                    let strBody=JSON.stringify( {success: false, data: null, err: "TABLE_CAN_NOT_FIND", message: err.toString()});
+                    resolve(strBody);
+                }else{
+                    if(data.length==0){
+                        Tables.create({
+                            ...entity
+                        }, function(err, result) {
+                            if(err) {
+                                console.log(err);
+                                let data= {success: false, data: null, err: "TABLE_CAN_NOT_CREATE", message: err.toString()};
+                                let body=JSON.stringify(data);
+                                resolve(body);
+                            }
+                            else {
+                                console.log(result);
+                                let data= {success: true, data: result, err: null, message: null}; 
+                                let body=JSON.stringify(data);
+                                resolve(body);
+                            }
+                        })
+                    }else{
+                        let data= {success: false, data: null, err: "TABLE_IS_EXIST", message: "the code of table is exits"}; 
+                        let body=JSON.stringify(data);
+                        resolve(body);
+                    }
                 }
-                else {
-                    console.log(result);
-                    let data= {success: true, data: result, err: null, message: null}; 
-                    let body=JSON.stringify(data);
-                    resolve(body);
-                }
-            })
+              });
+
        });
        ctx.body = body;
      }
