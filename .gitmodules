@@ -1,5 +1,2 @@
-[submodule "booking"]
-	path = booking
-	url = https://github.com/playerthong/booking.git
 [submodule "frontend"]
 	url = https://github.com/playerthong/booking.git
