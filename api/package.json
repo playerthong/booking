@@ -9,7 +9,7 @@
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "microservice-kit": "^0.4.1",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.19.0"
   },
   "devDependencies": {
